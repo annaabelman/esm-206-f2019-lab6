@@ -1,0 +1,45 @@
+---
+title: "t-test review"
+author: "Anna Abelman"
+date: "11/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+ggplot() +
+  geom_histogram(data = beaver1,
+                 aes(x = temp),
+                 fill = "blue") +
+  geom_histogram(data = beaver2,
+                 aes(x = temp), 
+                 fill = "green",
+                 alpha = 0.5)
+
+ggplot()+
+  geom_qq(data = beaver1, aes(sample = temp))
+```
+
+Is there a significant difference in mean body tmeperature for beaver 1 and beaver 2?
+
+Use a t-test. Two-tailed test (no directionality implied)
+```{r}
+my_ttest <- t.test(beaver1$temp, beaver2$temp)
+
+my_ttest
+```
+
+Mean body temperature for beaver 1 (`r round(my_ttest$estimate[1],2)`)
+
+
+
+
+
+
